@@ -13,7 +13,6 @@ export class Post extends Model{
 @Column({
     type: DataType.INTEGER,
     primaryKey: true,
-    autoIncrement: false,
     field: Post.POST_ID,
   })
   id!: number;

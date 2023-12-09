@@ -3,11 +3,6 @@ import { Request, Response } from "express";
 import { PostRepo } from "../repository/PostRepo";
 
 class PostController {
-    protected postrepo : PostRepo;
-    constructor() {
-        this.postrepo = new PostRepo();
-    }
-
     async create(req: Request, res:Response) {
         try{
             const {id, name, description} = req.body;
@@ -21,7 +16,8 @@ class PostController {
             
             console.log(post);
 
-            await this.postrepo.save(post);
+            // await this.postrepo.save(post);
+            await new PostRepo().save(post)
 
             //Send this via a message broker to analyse the data
 

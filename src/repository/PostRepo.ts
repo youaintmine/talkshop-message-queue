@@ -9,14 +9,16 @@ interface IPostRepo {
 export class PostRepo implements IPostRepo {
 
     async save(post : Post): Promise<void>{
-        console.log("Post repo is called")
         try {
-            // console.log("Something is happening");
-            await Post.create({
-                id: post.id,
+            const newPost = Post.build({
+                id : post.id,
                 name: post.name,
-                description: post.description
-            })            
+                description: post.description,
+            })
+            
+            await newPost.save();
+            //Deploy to a service
+            
         } catch (error) {
             console.log("Post repo error");
             throw new Error("Failed to create post");
