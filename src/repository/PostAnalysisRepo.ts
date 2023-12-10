@@ -10,12 +10,21 @@ interface IPostAnalysisRepo {
 export class PostAnalysisRepo implements IPostAnalysisRepo {
 
     async save(post: PostAnalysis): Promise<void> {
-        await PostAnalysis.create({
-            id: post.id,
-            wordcount: post.wordcount,
-            wordlength: post.wordlength
-        })
-    };
+        try {
+            const newAnalysis = PostAnalysis.build({
+                id : post.id,
+                wordcount: post.wordcount,
+                wordlength: post.wordlength,
+            });
+
+            await newAnalysis.save();
+
+        } catch (error) {
+            console.log("Post Analysis Repo Error");
+            throw new Error(`Failed to save analysis of Post ${post.id}`);
+        }
+
+    }
 
     async retrieveById(uniqueId: number): Promise<PostAnalysis> {
         try{

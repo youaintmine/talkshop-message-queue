@@ -1,6 +1,7 @@
 import { Post } from "../model/Post";
 import { Request, Response } from "express";
 import { PostRepo } from "../repository/PostRepo";
+import AnalysisServiceProducer from "../services/Analysis/AnalysisServiceProducer";
 
 class PostController {
     async create(req: Request, res:Response) {
@@ -14,10 +15,11 @@ class PostController {
             post.name = name;
             post.description = description;
             
-            console.log(post);
 
             // await this.postrepo.save(post);
             await new PostRepo().save(post)
+
+            await AnalysisServiceProducer.publish(id, name, description);
 
             //Send this via a message broker to analyse the data
 

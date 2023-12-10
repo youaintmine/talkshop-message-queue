@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from "express";
 import Database from "./config/database";
 import PostRouter from "./routes/PostRouter";
 import PostAnalysisRouter from "./routes/PostAnalysisRouter";
+import PostAnalysisService from "./services/PostAnalysisServiceConcrete";
 
 class App {
   public app: Application;
@@ -11,6 +12,8 @@ class App {
     this.databaseSync();
     this.plugins();
     this.routes();
+    const postAnalysisService = new PostAnalysisService();
+    postAnalysisService.start();
   }
 
   protected plugins(): void {

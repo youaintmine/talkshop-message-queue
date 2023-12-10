@@ -14,10 +14,9 @@ export class PostRepo implements IPostRepo {
                 id : post.id,
                 name: post.name,
                 description: post.description,
-            })
+            });
             
             await newPost.save();
-            //Deploy to a service
             
         } catch (error) {
             console.log("Post repo error");
