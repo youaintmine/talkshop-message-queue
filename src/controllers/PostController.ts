@@ -1,7 +1,7 @@
 import { Post } from "../model/Post";
 import { Request, Response } from "express";
 import { PostRepo } from "../repository/PostRepo";
-import AnalysisServiceProducer from "../services/Analysis/AnalysisServiceProducer";
+import AnalysisServiceProducer from "../services/Analysis/Producer";
 
 class PostController {
     async create(req: Request, res:Response) {
